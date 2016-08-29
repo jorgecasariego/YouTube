@@ -12,28 +12,74 @@ import UIKit
 // Step 10: To change width and height of cell we have to conform to UICollectionViewDelegateFlowLayout
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    var videos: [Video] = {
-        var kanyeChannel = Channel()
-        kanyeChannel.name = "KanyeIsTheBestChannel"
-        kanyeChannel.profileImageName = "kanye_profile"
+//    var videos: [Video] = {
+//        var kanyeChannel = Channel()
+//        kanyeChannel.name = "KanyeIsTheBestChannel"
+//        kanyeChannel.profileImageName = "kanye_profile"
+//        
+//        var blankSpaceVideo = Video()
+//        blankSpaceVideo.title = "Taylor Swift - Blank Space"
+//        blankSpaceVideo.thumbnailImageName = "taylor_swift_blank_space"
+//        blankSpaceVideo.channel = kanyeChannel
+//        blankSpaceVideo.numberOfViews = 32131231
+//        
+//        var badBloodVideo = Video()
+//        badBloodVideo.title = "Taylor Swift - Bad Blood featuring Keylor Lamas"
+//        badBloodVideo.thumbnailImageName = "taylor_swift_bad_blood"
+//        badBloodVideo.channel = kanyeChannel
+//        badBloodVideo.numberOfViews = 56542312
+//        
+//        return [blankSpaceVideo, badBloodVideo]
+//    }()
+    
+    var videos: [Video]?
+    
+    func fetchVideos() {
+        let url = NSURL(string: "https://s3-us-west-2.amazonaws.com/youtubeassets/home.json")
+        NSURLSession.sharedSession().dataTaskWithURL(url!) { (data, response, error) in
+            
+            if error != nil {
+                print(error)
+                return
+            }
+            
+            do {
+                let json = try NSJSONSerialization.JSONObjectWithData(data!, options: .MutableContainers)
+                
+                self.videos = [Video]()
+                
+                for dictionary in json as! [[String: AnyObject]] {
+                    let video = Video()
+                    video.title = dictionary["title"] as? String
+                    video.thumbnailImageName = dictionary["thumbnail_image_name"] as? String
+                    
+                    
+                    let channelDictionary = dictionary["channel"] as! [String: AnyObject]
+                    let channel = Channel()
+                    channel.name = channelDictionary["name"] as? String
+                    channel.profileImageName = channelDictionary["profile_image_name"] as? String
+                    
+                    video.channel = channel
+                    
+                    self.videos?.append(video)
+                }
+                
+                self.collectionView?.reloadData()
+                
+            } catch let jsonError {
+                print(jsonError)
+            }
+            
+            
+            
+        }.resume()
         
-        var blankSpaceVideo = Video()
-        blankSpaceVideo.title = "Taylor Swift - Blank Space"
-        blankSpaceVideo.thumbnailImageName = "taylor_swift_blank_space"
-        blankSpaceVideo.channel = kanyeChannel
-        blankSpaceVideo.numberOfViews = 32131231
-        
-        var badBloodVideo = Video()
-        badBloodVideo.title = "Taylor Swift - Bad Blood featuring Keylor Lamas"
-        badBloodVideo.thumbnailImageName = "taylor_swift_bad_blood"
-        badBloodVideo.channel = kanyeChannel
-        badBloodVideo.numberOfViews = 56542312
-        
-        return [blankSpaceVideo, badBloodVideo]
-    }()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        fetchVideos()
         
         // Add a title
         navigationItem.title = "Home"
@@ -92,7 +138,9 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     // Add number of items
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return videos.count
+        
+        return videos?.count ?? 0
+        
     }
     
     // Implement this function to return a cell
@@ -101,7 +149,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         // Every time we call dequeueReusableCellWithReuseIdentifier, it is calling setupView(frame) in VideoCell
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cellId", forIndexPath: indexPath) as! VideoCell
         
-        cell.video = videos[indexPath.item]
+        cell.video = videos?[indexPath.item]
         
         //  To see something we add some color
         //  cell.backgroundColor = UIColor.redColor()
