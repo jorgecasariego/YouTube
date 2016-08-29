@@ -20,12 +20,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window?.makeKeyAndVisible()
         
-        // Step 4: Create a UICollectionViewLayout and pass to HomeController
+        // Create a UICollectionViewLayout and pass to HomeController
         let layout = UICollectionViewFlowLayout()
         window?.rootViewController = UINavigationController(rootViewController: HomeController(collectionViewLayout: layout))
         
         UINavigationBar.appearance().barTintColor = UIColor.rgb(230, green: 32, blue: 32)
         application.statusBarStyle = .LightContent
+        
+        // get rid of black bar underneath navbar
+        UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), forBarMetrics: .Default)
         
         
         let statusBarBackgroundView = UIView()
