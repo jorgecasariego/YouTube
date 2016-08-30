@@ -10,13 +10,23 @@ import UIKit
 
 // Create this Model Object to save our cells name and image name of each item of settings
 class Setting: NSObject {
-    let name: String
+    let name: SettingName
     let imageName: String
     
-    init(name: String, imageName: String) {
+    init(name: SettingName, imageName: String) {
         self.name = name
         self.imageName = imageName
     }
+}
+
+enum SettingName: String {
+    case Cancel = "Cancel"
+    case Settings = "Settings"
+    case Term = "Termns & Privacy policy"
+    case SendFeedback = "Send Feedback"
+    case Help = "Help"
+    case SwitchAccount = "Switch Account"
+    
 }
 
 class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -34,12 +44,19 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
     let cellHeight:CGFloat = 50
     
     let settings: [Setting]  = {
-        return [Setting(name: "Settings", imageName: "settings"),
-                Setting(name: "Termns & Privacy policy", imageName: "privacy"),
-                Setting(name: "Send Feedback", imageName: "feedback"),
-                Setting(name: "Help", imageName: "help"),
-                Setting(name: "Switch Account", imageName: "switch_account"),
-                Setting(name: "Cancel", imageName: "cancel")]
+        let settingsSetting = Setting(name: .Settings, imageName: "settings")
+        let termSetting = Setting(name: .Term, imageName: "privacy")
+        let sendFeecbackSetting = Setting(name: .SendFeedback, imageName: "feedback")
+        let helpSetting = Setting(name: .Help, imageName: "help")
+        let switchAccountSetting = Setting(name: .SwitchAccount, imageName: "switch_account")
+        let cancelSetting = Setting(name: .Cancel, imageName: "cancel")
+        
+        return [settingsSetting,
+                termSetting,
+                sendFeecbackSetting,
+                helpSetting,
+                switchAccountSetting,
+                cancelSetting]
     }()
     
     var homeController: HomeController?
@@ -81,7 +98,7 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
             
             
         }) { (completed: Bool) in
-            if setting.name != "" && setting.name != "Cancel" {
+            if setting.name != .Cancel {
                 self.homeController?.showControllerForSetting(setting)
             }
             
