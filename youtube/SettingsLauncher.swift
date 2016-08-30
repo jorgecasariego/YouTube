@@ -20,6 +20,7 @@ class Setting: NSObject {
 }
 
 class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    
     let blackView = UIView()
     
     let collectionView: UICollectionView = {
@@ -40,6 +41,8 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
                 Setting(name: "Switch Account", imageName: "switch_account"),
                 Setting(name: "Cancel", imageName: "cancel")]
     }()
+    
+    var homeController: HomeController?
     
     func showSettings() {
         
@@ -67,13 +70,21 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
         
     }
     
-    func handleDismiss() {
-        UIView.animateWithDuration(0.5) {
+    func handleDismiss(setting: Setting) {
+        UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .CurveEaseOut, animations: {
+            
             self.blackView.alpha = 0
             
             if let window = UIApplication.sharedApplication().keyWindow {
                 self.collectionView.frame = CGRectMake(0, window.frame.height, window.frame.width, window.frame.height)
             }
+            
+            
+        }) { (completed: Bool) in
+            if setting.name != "" && setting.name != "Cancel" {
+                self.homeController?.showControllerForSetting(setting)
+            }
+            
         }
     }
     
@@ -98,6 +109,13 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
     //Reduce the space between cells
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
         return 0
+    }
+    
+    //Select item of setting
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        let setting = settings[indexPath.item]
+        handleDismiss(setting)
     }
     
     override init(){
