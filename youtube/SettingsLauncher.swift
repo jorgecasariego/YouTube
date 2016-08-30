@@ -8,6 +8,17 @@
 
 import UIKit
 
+// Create this Model Object to save our cells name and image name of each item of settings
+class Setting: NSObject {
+    let name: String
+    let imageName: String
+    
+    init(name: String, imageName: String) {
+        self.name = name
+        self.imageName = imageName
+    }
+}
+
 class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     let blackView = UIView()
     
@@ -19,6 +30,16 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
     }()
     
     let cellId = "cellId"
+    let cellHeight:CGFloat = 50
+    
+    let settings: [Setting]  = {
+        return [Setting(name: "Settings", imageName: "settings"),
+                Setting(name: "Termns & Privacy policy", imageName: "privacy"),
+                Setting(name: "Send Feedback", imageName: "feedback"),
+                Setting(name: "Help", imageName: "help"),
+                Setting(name: "Switch Account", imageName: "switch_account"),
+                Setting(name: "Cancel", imageName: "cancel")]
+    }()
     
     func showSettings() {
         
@@ -33,8 +54,8 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
             window.addSubview(blackView)
             window.addSubview(collectionView)
             
-            let height: CGFloat = 200
-            let y = window.frame.height - 200
+            let height: CGFloat = CGFloat(settings.count) * cellHeight
+            let y = window.frame.height - height
             collectionView.frame = CGRectMake(0, window.frame.height, window.frame.width, height)
             
             UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .CurveEaseOut, animations: { 
@@ -58,13 +79,25 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
     
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return settings.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellId, forIndexPath: indexPath)
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellId, forIndexPath: indexPath) as! SettingCell
+        
+        let setting = settings[indexPath.item]
+        cell.setting = setting
         
         return cell
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        return CGSizeMake(collectionView.frame.width, 50)
+    }
+    
+    //Reduce the space between cells
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return 0
     }
     
     override init(){
@@ -73,7 +106,7 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        // We can use UICollectionViewCell.self but in our case we need a custom cell with a label and image
-        collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        // We can use UICollectionViewCell.self but in our case we need a custom cell with a label and image, so we'll use SettingCell
+        collectionView.registerClass(SettingCell.self, forCellWithReuseIdentifier: cellId)
     }
 }
