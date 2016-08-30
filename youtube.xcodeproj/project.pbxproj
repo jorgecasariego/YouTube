@@ -16,6 +16,7 @@
 		278065F51D6F53DA00FC8EFC /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278065F41D6F53DA00FC8EFC /* VideoCell.swift */; };
 		278065F81D70ABDB00FC8EFC /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278065F71D70ABDB00FC8EFC /* MenuBar.swift */; };
 		2782107C1D7494D600C8063C /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2782107B1D7494D600C8063C /* Video.swift */; };
+		2782107E1D74E0B200C8063C /* SettingsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2782107D1D74E0B200C8063C /* SettingsLauncher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		278065F41D6F53DA00FC8EFC /* VideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		278065F71D70ABDB00FC8EFC /* MenuBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
 		2782107B1D7494D600C8063C /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
+		2782107D1D74E0B200C8063C /* SettingsLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsLauncher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				278065E01D6DFE3000FC8EFC /* HomeController.swift */,
+				2782107D1D74E0B200C8063C /* SettingsLauncher.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -182,6 +185,7 @@
 				278065E11D6DFE3000FC8EFC /* HomeController.swift in Sources */,
 				2782107C1D7494D600C8063C /* Video.swift in Sources */,
 				278065F51D6F53DA00FC8EFC /* VideoCell.swift in Sources */,
+				2782107E1D74E0B200C8063C /* SettingsLauncher.swift in Sources */,
 				278065F21D6F535400FC8EFC /* Extensions.swift in Sources */,
 				278065DF1D6DFE3000FC8EFC /* AppDelegate.swift in Sources */,
 				278065F81D70ABDB00FC8EFC /* MenuBar.swift in Sources */,
