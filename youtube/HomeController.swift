@@ -12,20 +12,12 @@ import UIKit
 // Step 10: To change width and height of cell we have to conform to UICollectionViewDelegateFlowLayout
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         
-    var videos: [Video]?
-    let cellId = "cellId"
     
-    func fetchVideos() {
-        ApiService.sharedInstance.fetchVideos { (videos: [Video]) in
-            self.videos = videos
-            self.collectionView?.reloadData()
-        }
-    }
-
+    let cellId = "cellId"
+    let titles = ["Home", "Trending", "Subscripcion", "Account"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        fetchVideos()
         
         // Add a title
         navigationController?.navigationBar.translucent = false
@@ -52,13 +44,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         }
         
         collectionView?.backgroundColor = UIColor.whiteColor()
-        
-        // We need to register cellId to use with cell
-        // collectionView?.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "cellId")
-        
-        // Now we call the new VideoCell
-//        collectionView?.registerClass(VideoCell.self, forCellWithReuseIdentifier: "cellId")
-        collectionView?.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView?.registerClass(FeedCell.self, forCellWithReuseIdentifier: cellId)
         
         collectionView?.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
         collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
@@ -107,6 +93,14 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         let indexPath = NSIndexPath(forItem: menuIndex, inSection: 0)
         
         collectionView?.scrollToItemAtIndexPath(indexPath, atScrollPosition: .None, animated: true)
+        
+        setTitleForIndex(menuIndex)
+    }
+    
+    private func setTitleForIndex(index: Int){
+        if let titleLabel = navigationItem.titleView as? UILabel {
+            titleLabel.text = "  \(titles[index])"
+        }
     }
     
     lazy var menuBar: MenuBar = {
@@ -135,11 +129,15 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         menuBar.horizontalBarLeftAnchorConstraint?.constant = scrollView.contentOffset.x / 4
     }
     
+    
+    
     override func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         
         let index = targetContentOffset.memory.x / view.frame.width
         let indexPath = NSIndexPath(forItem: Int(index), inSection: 0)
         menuBar.collectionView.selectItemAtIndexPath(indexPath, animated: true, scrollPosition: .None)
+        
+        setTitleForIndex(Int(index))
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -149,48 +147,13 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellId, forIndexPath: indexPath)
         
-        let colors: [UIColor] = [.blueColor(), .greenColor(), .grayColor(), .purpleColor()]
-        
-        cell.backgroundColor = colors[indexPath.item]
-        
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake(view.frame.width, view.frame.height)
+        return CGSizeMake(view.frame.width, view.frame.height - 50)
     }
     
-//    // Add number of items
-//    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        
-//        return videos?.count ?? 0
-//        
-//    }
-//    
-//    // Implement this function to return a cell
-//    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-//        
-//        // Every time we call dequeueReusableCellWithReuseIdentifier, it is calling setupView(frame) in VideoCell
-//        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cellId", forIndexPath: indexPath) as! VideoCell
-//        
-//        cell.video = videos?[indexPath.item]
-//        
-//        //  To see something we add some color
-//        //  cell.backgroundColor = UIColor.redColor()
-//        
-//        return cell
-//    }
-//    
-//    // After conform to UICollectionViewDelegateFlowLayout we implement sizeForItemAtIndexPath
-//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-//        let height = (view.frame.width - 16 - 16) * 9 / 16
-//        return CGSizeMake(view.frame.width, height + 16 + 88)
-//    }
-//    
-//    // To control spaces between cells
-//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
-//        return 0
-//    }
 
 }
 

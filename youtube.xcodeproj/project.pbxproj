@@ -19,6 +19,7 @@
 		2782107E1D74E0B200C8063C /* SettingsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2782107D1D74E0B200C8063C /* SettingsLauncher.swift */; };
 		278210801D75EDFC00C8063C /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2782107F1D75EDFC00C8063C /* SettingCell.swift */; };
 		278210831D7720A500C8063C /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278210821D7720A500C8063C /* ApiService.swift */; };
+		278210851D773ED600C8063C /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278210841D773ED600C8063C /* FeedCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		2782107D1D74E0B200C8063C /* SettingsLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsLauncher.swift; sourceTree = "<group>"; };
 		2782107F1D75EDFC00C8063C /* SettingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		278210821D7720A500C8063C /* ApiService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
+		278210841D773ED600C8063C /* FeedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 				278065F41D6F53DA00FC8EFC /* VideoCell.swift */,
 				278065F71D70ABDB00FC8EFC /* MenuBar.swift */,
 				2782107F1D75EDFC00C8063C /* SettingCell.swift */,
+				278210841D773ED600C8063C /* FeedCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -198,6 +201,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				278065E11D6DFE3000FC8EFC /* HomeController.swift in Sources */,
+				278210851D773ED600C8063C /* FeedCell.swift in Sources */,
 				2782107C1D7494D600C8063C /* Video.swift in Sources */,
 				278210801D75EDFC00C8063C /* SettingCell.swift in Sources */,
 				278065F51D6F53DA00FC8EFC /* VideoCell.swift in Sources */,
