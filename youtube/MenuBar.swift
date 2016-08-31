@@ -24,6 +24,8 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
     let cellID = "cellId"
     let imageNames = ["home", "trending", "subscriptions", "account"]
     
+    var homeController: HomeController?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -35,6 +37,41 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
         
         let selectedIndexPath = NSIndexPath(forItem: 0, inSection: 0)
         collectionView.selectItemAtIndexPath(selectedIndexPath, animated: false, scrollPosition: .None)
+        
+        setupHorizontalView()
+        
+    }
+    
+    var horizontalBarLeftAnchorConstraint: NSLayoutConstraint?
+    
+    func setupHorizontalView() {
+        let horizontalBarView = UIView()
+        horizontalBarView.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        horizontalBarView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(horizontalBarView)
+        
+        // New school way of laying our views
+        // iOS 9
+        // need x, y, width and height constraints
+        // this won't work is we don't put horizontalBarView.translatesAutoresizingMaskIntoConstraints = false
+        horizontalBarLeftAnchorConstraint = horizontalBarView.leftAnchor.constraintEqualToAnchor(self.leftAnchor)
+        horizontalBarLeftAnchorConstraint?.active = true
+        horizontalBarView.bottomAnchor.constraintEqualToAnchor(self.bottomAnchor).active = true
+        horizontalBarView.widthAnchor.constraintEqualToAnchor(self.widthAnchor, multiplier: 1/4).active = true
+        horizontalBarView.heightAnchor.constraintEqualToConstant(4).active = true
+        
+    }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+//        let x = CGFloat(indexPath.item) * frame.width / 4
+//        horizontalBarLeftAnchorConstraint?.constant = x
+//        
+//        UIView.animateWithDuration(0.75, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .CurveEaseOut, animations: { 
+//            self.layoutIfNeeded()
+//            }, completion: nil)
+        
+        homeController?.scrollToMenuIndex(indexPath.item)
         
     }
     

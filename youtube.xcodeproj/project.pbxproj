@@ -18,6 +18,7 @@
 		2782107C1D7494D600C8063C /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2782107B1D7494D600C8063C /* Video.swift */; };
 		2782107E1D74E0B200C8063C /* SettingsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2782107D1D74E0B200C8063C /* SettingsLauncher.swift */; };
 		278210801D75EDFC00C8063C /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2782107F1D75EDFC00C8063C /* SettingCell.swift */; };
+		278210831D7720A500C8063C /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278210821D7720A500C8063C /* ApiService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		2782107B1D7494D600C8063C /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		2782107D1D74E0B200C8063C /* SettingsLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsLauncher.swift; sourceTree = "<group>"; };
 		2782107F1D75EDFC00C8063C /* SettingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
+		278210821D7720A500C8063C /* ApiService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 		278065DD1D6DFE3000FC8EFC /* youtube */ = {
 			isa = PBXGroup;
 			children = (
+				278210811D771BF900C8063C /* ApiService */,
 				2782107A1D7494A300C8063C /* Model */,
 				278065F31D6F53CE00FC8EFC /* View */,
 				278065F61D6F541A00FC8EFC /* Controller */,
@@ -112,6 +115,14 @@
 				2782107B1D7494D600C8063C /* Video.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		278210811D771BF900C8063C /* ApiService */ = {
+			isa = PBXGroup;
+			children = (
+				278210821D7720A500C8063C /* ApiService.swift */,
+			);
+			name = ApiService;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -191,6 +202,7 @@
 				278210801D75EDFC00C8063C /* SettingCell.swift in Sources */,
 				278065F51D6F53DA00FC8EFC /* VideoCell.swift in Sources */,
 				2782107E1D74E0B200C8063C /* SettingsLauncher.swift in Sources */,
+				278210831D7720A500C8063C /* ApiService.swift in Sources */,
 				278065F21D6F535400FC8EFC /* Extensions.swift in Sources */,
 				278065DF1D6DFE3000FC8EFC /* AppDelegate.swift in Sources */,
 				278065F81D70ABDB00FC8EFC /* MenuBar.swift in Sources */,
