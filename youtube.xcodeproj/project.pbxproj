@@ -20,6 +20,8 @@
 		278210801D75EDFC00C8063C /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2782107F1D75EDFC00C8063C /* SettingCell.swift */; };
 		278210831D7720A500C8063C /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278210821D7720A500C8063C /* ApiService.swift */; };
 		278210851D773ED600C8063C /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278210841D773ED600C8063C /* FeedCell.swift */; };
+		278210871D779A1B00C8063C /* TrendingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278210861D779A1B00C8063C /* TrendingCell.swift */; };
+		278210891D789B5C00C8063C /* SubscriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278210881D789B5C00C8063C /* SubscriptionCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		2782107F1D75EDFC00C8063C /* SettingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		278210821D7720A500C8063C /* ApiService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		278210841D773ED600C8063C /* FeedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
+		278210861D779A1B00C8063C /* TrendingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingCell.swift; sourceTree = "<group>"; };
+		278210881D789B5C00C8063C /* SubscriptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +103,8 @@
 				278065F71D70ABDB00FC8EFC /* MenuBar.swift */,
 				2782107F1D75EDFC00C8063C /* SettingCell.swift */,
 				278210841D773ED600C8063C /* FeedCell.swift */,
+				278210861D779A1B00C8063C /* TrendingCell.swift */,
+				278210881D789B5C00C8063C /* SubscriptionCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -202,6 +208,7 @@
 			files = (
 				278065E11D6DFE3000FC8EFC /* HomeController.swift in Sources */,
 				278210851D773ED600C8063C /* FeedCell.swift in Sources */,
+				278210871D779A1B00C8063C /* TrendingCell.swift in Sources */,
 				2782107C1D7494D600C8063C /* Video.swift in Sources */,
 				278210801D75EDFC00C8063C /* SettingCell.swift in Sources */,
 				278065F51D6F53DA00FC8EFC /* VideoCell.swift in Sources */,
@@ -209,6 +216,7 @@
 				278210831D7720A500C8063C /* ApiService.swift in Sources */,
 				278065F21D6F535400FC8EFC /* Extensions.swift in Sources */,
 				278065DF1D6DFE3000FC8EFC /* AppDelegate.swift in Sources */,
+				278210891D789B5C00C8063C /* SubscriptionCell.swift in Sources */,
 				278065F81D70ABDB00FC8EFC /* MenuBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
