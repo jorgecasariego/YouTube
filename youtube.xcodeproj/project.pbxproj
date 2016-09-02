@@ -22,6 +22,7 @@
 		278210851D773ED600C8063C /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278210841D773ED600C8063C /* FeedCell.swift */; };
 		278210871D779A1B00C8063C /* TrendingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278210861D779A1B00C8063C /* TrendingCell.swift */; };
 		278210891D789B5C00C8063C /* SubscriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278210881D789B5C00C8063C /* SubscriptionCell.swift */; };
+		2782108B1D78D20C00C8063C /* VideoLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2782108A1D78D20C00C8063C /* VideoLauncher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		278210841D773ED600C8063C /* FeedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		278210861D779A1B00C8063C /* TrendingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingCell.swift; sourceTree = "<group>"; };
 		278210881D789B5C00C8063C /* SubscriptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionCell.swift; sourceTree = "<group>"; };
+		2782108A1D78D20C00C8063C /* VideoLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoLauncher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				278065F11D6F535400FC8EFC /* Extensions.swift */,
+				2782108A1D78D20C00C8063C /* VideoLauncher.swift */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 				278210801D75EDFC00C8063C /* SettingCell.swift in Sources */,
 				278065F51D6F53DA00FC8EFC /* VideoCell.swift in Sources */,
 				2782107E1D74E0B200C8063C /* SettingsLauncher.swift in Sources */,
+				2782108B1D78D20C00C8063C /* VideoLauncher.swift in Sources */,
 				278210831D7720A500C8063C /* ApiService.swift in Sources */,
 				278065F21D6F535400FC8EFC /* Extensions.swift in Sources */,
 				278065DF1D6DFE3000FC8EFC /* AppDelegate.swift in Sources */,
