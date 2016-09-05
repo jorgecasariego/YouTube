@@ -26,6 +26,7 @@ class VideoPlayerView: UIView {
         return view
     }()
     
+    
     lazy var pausePlayButton: UIButton = {
         let button = UIButton(type: .System)
         let image = UIImage(named: "pause")
@@ -37,6 +38,7 @@ class VideoPlayerView: UIView {
         button.addTarget(self, action: #selector(handlePause), forControlEvents: .TouchUpInside)
         return button
     }()
+    
     
     var isPlaying = false
     
@@ -55,6 +57,47 @@ class VideoPlayerView: UIView {
         isPlaying = !isPlaying
     }
     
+    let videoLengthLabel: UILabel = {
+        let label = UILabel()
+        label.text = "00:00"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .whiteColor()
+        label.font = UIFont.boldSystemFontOfSize(14)
+        label.textAlignment = .Right
+        return label
+    }()
+    
+    lazy var videoSlider: UISlider = {
+        let slider = UISlider()
+        slider.translatesAutoresizingMaskIntoConstraints = false
+        slider.minimumTrackTintColor = .redColor()
+        slider.maximumTrackTintColor = .whiteColor()
+        slider.setThumbImage(UIImage(named: "thumb"), forState: .Normal)
+        
+        slider.addTarget(self, action: #selector(handleSliderChange), forControlEvents: .ValueChanged)
+        return slider
+    }()
+    
+    func handleSliderChange() {
+        print(videoSlider.value)
+        
+        if let duration = player?.currentItem?.duration {
+            let totalSeconds = CMTimeGetSeconds(duration)
+            
+            let value = Float64(videoSlider.value) * totalSeconds
+            
+            //Esto hace que nos movamos "value" segundos en el video
+            let seekTime = CMTime(value: Int64(value), timescale: 1)
+            
+            player?.seekToTime(seekTime, completionHandler: { (completedSeek) in
+                //
+            })
+
+        }
+        
+    }
+
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -72,6 +115,19 @@ class VideoPlayerView: UIView {
         pausePlayButton.centerYAnchor.constraintEqualToAnchor(centerYAnchor).active = true
         pausePlayButton.widthAnchor.constraintEqualToConstant(50).active = true
         pausePlayButton.heightAnchor.constraintEqualToConstant(50).active = true
+        
+        controlsContainerView.addSubview(videoLengthLabel)
+        videoLengthLabel.rightAnchor.constraintEqualToAnchor(rightAnchor, constant: -8).active = true
+        videoLengthLabel.bottomAnchor.constraintEqualToAnchor(bottomAnchor).active = true
+        videoLengthLabel.widthAnchor.constraintEqualToConstant(60).active = true
+        videoLengthLabel.heightAnchor.constraintEqualToConstant(20).active = true
+        
+        controlsContainerView.addSubview(videoSlider)
+        videoSlider.rightAnchor.constraintEqualToAnchor(videoLengthLabel.leftAnchor).active = true
+        videoSlider.bottomAnchor.constraintEqualToAnchor(bottomAnchor).active = true
+        videoSlider.leftAnchor.constraintEqualToAnchor(leftAnchor).active = true
+        videoSlider.heightAnchor.constraintEqualToConstant(30).active = true
+        
         
         
         backgroundColor = UIColor.blackColor()
@@ -104,6 +160,15 @@ class VideoPlayerView: UIView {
             controlsContainerView.backgroundColor = .clearColor()
             pausePlayButton.hidden = false
             isPlaying = true
+            
+            if let duration = player?.currentItem?.duration {
+                let seconds = CMTimeGetSeconds(duration)
+                
+                let secondsText = String(format: "%02d", Int(seconds) % 60)
+                let minutesText = String(format: "%02d", Int(seconds) / 60)
+                
+                videoLengthLabel.text = "\(minutesText):\(secondsText)"
+            }
         }
     }
     
