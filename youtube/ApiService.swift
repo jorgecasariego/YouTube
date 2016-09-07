@@ -11,7 +11,7 @@ import UIKit
 class ApiService: NSObject {
     
     static let sharedInstance = ApiService()
-    let baseUrl = "https://s3-us-west-2.amazonaws.com/youtubeassets"
+    let baseUrl = "http://ios.enterprisesolutions.com.py/youtubeapp"
     
     func fetchVideos(completion: ([Video]) -> ()) {
         let url = "\(baseUrl)/home.json"
