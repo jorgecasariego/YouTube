@@ -9,52 +9,52 @@
 import UIKit
 
 extension UIColor {
-    static func rgb(red: CGFloat, green: CGFloat, blue: CGFloat) -> UIColor {
+    static func rgb(_ red: CGFloat, green: CGFloat, blue: CGFloat) -> UIColor {
         return UIColor(red: red/255, green: green/255, blue: blue/255, alpha: 1)
     }
 }
  
 extension UIView {
-    func addConstraintsWithFormat(format: String, views: UIView...) {
+    func addConstraintsWithFormat(_ format: String, views: UIView...) {
         var viewsDictionary = [String: UIView]()
         
-        for(index, view) in views.enumerate() {
+        for(index, view) in views.enumerated() {
             let key = "v\(index)"
             
             view.translatesAutoresizingMaskIntoConstraints = false
             viewsDictionary[key] = view
         }
         
-        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(format, options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
     }
 }
 
-let imageCache = NSCache()
+let imageCache = NSCache<AnyObject, AnyObject>()
 
 class CustomImageView: UIImageView {
     var imageUrlString: String?
     
-    func loadImageUsingUrlString(urlString: String) {
+    func loadImageUsingUrlString(_ urlString: String) {
         
         imageUrlString = urlString
         
-        let url = NSURL(string: urlString)
+        let url = URL(string: urlString)
         
         image = nil
         
-        if let imageFromCache = imageCache.objectForKey(urlString) as? UIImage{
+        if let imageFromCache = imageCache.object(forKey: urlString as AnyObject) as? UIImage{
             self.image = imageFromCache
             return
         }
         
-        NSURLSession.sharedSession().dataTaskWithURL(url!, completionHandler: { (data, response, error) in
+        URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
             
             if error != nil {
                 print(error)
                 return
             }
             
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 let imageToCache = UIImage(data: data!)
                 
                 // Esto hacemos para que no cargue otra imagen que no sea la correcta
@@ -63,7 +63,7 @@ class CustomImageView: UIImageView {
                     self.image = imageToCache
                 }
                 
-                imageCache.setObject(imageToCache!, forKey: urlString)
+                imageCache.setObject(imageToCache!, forKey: urlString as AnyObject)
                 
                 
             })

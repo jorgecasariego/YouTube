@@ -10,11 +10,11 @@ import UIKit
 
 class SettingCell: BaseCell {
     
-    override var highlighted: Bool {
+    override var isHighlighted: Bool {
         didSet {
-            backgroundColor = highlighted ? UIColor.darkGrayColor() : UIColor.whiteColor()
-            nameLabel.textColor = highlighted ? UIColor.whiteColor() : UIColor.blackColor()
-            iconImageView.tintColor = highlighted ? UIColor.whiteColor() :UIColor.darkGrayColor()
+            backgroundColor = isHighlighted ? UIColor.darkGray : UIColor.white
+            nameLabel.textColor = isHighlighted ? UIColor.white : UIColor.black
+            iconImageView.tintColor = isHighlighted ? UIColor.white :UIColor.darkGray
         }
     }
     
@@ -23,8 +23,8 @@ class SettingCell: BaseCell {
             nameLabel.text = setting?.name.rawValue
             
             if let imageName = setting?.imageName {
-                iconImageView.image = UIImage(named: imageName)?.imageWithRenderingMode(.AlwaysTemplate)
-                iconImageView.tintColor = UIColor.darkGrayColor()
+                iconImageView.image = UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate)
+                iconImageView.tintColor = UIColor.darkGray
             }
         }
     }
@@ -32,7 +32,7 @@ class SettingCell: BaseCell {
     let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "Settings"
-        label.font = UIFont.boldSystemFontOfSize(13)
+        label.font = UIFont.boldSystemFont(ofSize: 13)
         return label
     }()
     
@@ -54,7 +54,7 @@ class SettingCell: BaseCell {
         addConstraintsWithFormat("V:[v0(30)]", views: iconImageView)
         
         //Align center Y iconImageView
-        addConstraint(NSLayoutConstraint(item: iconImageView, attribute: .CenterY, relatedBy: .Equal, toItem: self, attribute: .CenterY, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: iconImageView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
         
         
     }
