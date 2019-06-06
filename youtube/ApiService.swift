@@ -11,28 +11,22 @@ import UIKit
 class ApiService: NSObject {
     
     static let sharedInstance = ApiService()
-    let baseUrl = "http://ios.enterprisesolutions.com.py/youtubeapp"
+    
+    let baseUrl = "https://s3-us-west-2.amazonaws.com/youtubeassets"
     
     func fetchVideos(_ completion: @escaping ([Video]) -> ()) {
-        let url = "\(baseUrl)/home.json"
-        
-        fetchFeedForUrlString(url, completion: completion)
+        fetchFeedForUrlString("\(baseUrl)/home_num_likes.json", completion: completion)
     }
     
     func fetchTrendingFeed(_ completion: @escaping ([Video]) -> ()) {
-        let url = "\(baseUrl)/trending.json"
-        
-        fetchFeedForUrlString(url, completion: completion)
+        fetchFeedForUrlString("\(baseUrl)/trending.json", completion: completion)
     }
     
     func fetchSubscriptionFeed(_ completion: @escaping ([Video]) -> ()) {
-        let url = "\(baseUrl)/subscriptions.json"
-        
-        fetchFeedForUrlString(url, completion: completion)
-        
+        fetchFeedForUrlString("\(baseUrl)/subscriptions.json", completion: completion)
     }
     
-    func fetchFeedForUrlString(_ urlString: String, completion: @escaping ([Video]) -> () ) {
+    func fetchFeedForUrlString(_ urlString: String, completion: @escaping ([Video]) -> ()) {
         let url = URL(string: urlString)
         URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
             
@@ -44,22 +38,72 @@ class ApiService: NSObject {
             do {
                 if let unwrappedData = data, let jsonDictionaries = try JSONSerialization.jsonObject(with: unwrappedData, options: .mutableContainers) as? [[String: AnyObject]] {
                     
-                    // Version 3
                     DispatchQueue.main.async(execute: {
                         completion(jsonDictionaries.map({return Video(dictionary: $0)}))
                     })
                 }
                 
-                
-                
             } catch let jsonError {
                 print(jsonError)
             }
-            
-            }) .resume()
+        }) .resume()
     }
-
+    
+    
 }
+
+//class ApiService: NSObject {
+//
+//    static let sharedInstance = ApiService()
+//    let baseUrl = "http://esolutions.com.py/ios"
+//
+//    func fetchVideos(_ completion: @escaping ([Video]) -> ()) {
+//        let url = "\(baseUrl)/home.json"
+//
+//        fetchFeedForUrlString(url, completion: completion)
+//    }
+//
+//    func fetchTrendingFeed(_ completion: @escaping ([Video]) -> ()) {
+//        let url = "\(baseUrl)/trending.json"
+//
+//        fetchFeedForUrlString(url, completion: completion)
+//    }
+//
+//    func fetchSubscriptionFeed(_ completion: @escaping ([Video]) -> ()) {
+//        let url = "\(baseUrl)/subscriptions.json"
+//
+//        fetchFeedForUrlString(url, completion: completion)
+//
+//    }
+//
+//    func fetchFeedForUrlString(_ urlString: String, completion: @escaping ([Video]) -> () ) {
+//        let url = URL(string: urlString)
+//        URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
+//
+//            if error != nil {
+//                print(error)
+//                return
+//            }
+//
+//            do {
+//                if let unwrappedData = data, let jsonDictionaries = try JSONSerialization.jsonObject(with: unwrappedData, options: .mutableContainers) as? [[String: AnyObject]] {
+//
+//                    // Version 3
+//                    DispatchQueue.main.async(execute: {
+//                        completion(jsonDictionaries.map({return Video(dictionary: $0)}))
+//                    })
+//                }
+//
+//
+//
+//            } catch let jsonError {
+//                print(jsonError)
+//            }
+//
+//            }) .resume()
+//    }
+//
+//}
 
 //  VERSION 2
 //            let numberArray = [1,2,3]

@@ -16,11 +16,11 @@ class SafeJsonObject: NSObject {
     override func setValue(_ value: Any?, forKey key: String) {
         
         // Convertimos la primera letra a Mayuscula
-        let uppercaseFirstCharacter = String(key.characters.first!).uppercased()
+        let uppercaseFirstCharacter = String(key.first!).uppercased()
         
         
         // Reemplazamos la primera letra de la palabra de minuscula a mayuscula
-        let range = key.startIndex..<key.characters.index(key.startIndex, offsetBy: 1)
+        let range = key.startIndex..<key.index(key.startIndex, offsetBy: 1)
         let selectorString = key.replacingCharacters(in: range, with: uppercaseFirstCharacter)
         
         

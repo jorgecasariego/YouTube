@@ -49,7 +49,7 @@ class VideoCell: BaseCell {
                 let size = CGSize(width: frame.width - 16 - 44 - 8 - 16 , height: 1000)
                 let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
                 
-                let estimatedRect = NSString(string: title).boundingRect(with: size, options: options, attributes: [NSFontAttributeName:UIFont.systemFont(ofSize: 14)], context: nil)
+                let estimatedRect = NSString(string: title).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 14)], context: nil)
                 
                 
                 if estimatedRect.size.height > 20 {
@@ -110,7 +110,7 @@ class VideoCell: BaseCell {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.text = "TaylorSwiftVEVO - 1,500,000,433 views - 2 years ago"
-        textView.textContainerInset = UIEdgeInsetsMake(0, -4, 0, 0)
+        textView.textContainerInset = UIEdgeInsets(top: 0, left: -4, bottom: 0, right: 0)
         textView.textColor = UIColor.lightGray
         return textView
     }()

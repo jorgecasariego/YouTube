@@ -12,7 +12,7 @@ import AVFoundation
 class VideoPlayerView: UIView {
     
     let activityIndicatorView: UIActivityIndicatorView = {
-        let aiv = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        let aiv = UIActivityIndicatorView(style: .whiteLarge)
         
         //Si vamos a agregar algun constraint a alguna de las vistas debemos agregar esto
         aiv.translatesAutoresizingMaskIntoConstraints = false
@@ -30,7 +30,7 @@ class VideoPlayerView: UIView {
     lazy var pausePlayButton: UIButton = {
         let button = UIButton(type: .system)
         let image = UIImage(named: "pause")
-        button.setImage(image, for: UIControlState())
+        button.setImage(image, for: UIControl.State())
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = UIColor.white
         button.isHidden = true
@@ -42,14 +42,14 @@ class VideoPlayerView: UIView {
     
     var isPlaying = false
     
-    func handlePause() {
+    @objc func handlePause() {
         
         if isPlaying {
             player?.pause()
-            pausePlayButton.setImage(UIImage(named: "play"), for: UIControlState())
+            pausePlayButton.setImage(UIImage(named: "play"), for: UIControl.State())
         } else {
             player?.play()
-            pausePlayButton.setImage(UIImage(named: "pause"), for: UIControlState())
+            pausePlayButton.setImage(UIImage(named: "pause"), for: UIControl.State())
         }
         
         
@@ -81,13 +81,13 @@ class VideoPlayerView: UIView {
         slider.translatesAutoresizingMaskIntoConstraints = false
         slider.minimumTrackTintColor = UIColor.red
         slider.maximumTrackTintColor = UIColor.white
-        slider.setThumbImage(UIImage(named: "thumb"), for: UIControlState())
+        slider.setThumbImage(UIImage(named: "thumb"), for: UIControl.State())
         
         slider.addTarget(self, action: #selector(handleSliderChange), for: .valueChanged)
         return slider
     }()
     
-    func handleSliderChange() {
+    @objc func handleSliderChange() {
         print(videoSlider.value)
         
         if let duration = player?.currentItem?.duration {

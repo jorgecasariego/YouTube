@@ -73,7 +73,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }()
     
     //Show more menu
-    func handleMore() {
+    @objc func handleMore() {
         // Because we don't want to set homeController to self everytime we click over settings we'll use lazy var instanciatiation (see above to know how to do it)
         //settingsLauncher.homeController = self
         settingsLauncher.showSettings()
@@ -85,18 +85,18 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         dummySettingsViewController.navigationItem.title = setting.name.rawValue
         
         navigationController?.navigationBar.tintColor = UIColor.white
-        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         navigationController?.pushViewController(dummySettingsViewController, animated: true)
     }
     
-    func handleSearch() {
+    @objc func handleSearch() {
         print(123)
     }
     
     func scrollToMenuIndex(_ menuIndex: Int){
         let indexPath = IndexPath(item: menuIndex, section: 0)
         
-        collectionView?.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition(), animated: true)
+        collectionView?.scrollToItem(at: indexPath, at: UICollectionView.ScrollPosition(), animated: true)
         
         setTitleForIndex(menuIndex)
     }
@@ -139,7 +139,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         let index = targetContentOffset.pointee.x / view.frame.width
         let indexPath = IndexPath(item: Int(index), section: 0)
-        menuBar.collectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition())
+        menuBar.collectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionView.ScrollPosition())
         
         setTitleForIndex(Int(index))
     }
